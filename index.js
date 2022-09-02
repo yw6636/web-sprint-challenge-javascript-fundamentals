@@ -16,7 +16,7 @@ function myFunction() {
 //myFunction();
 
 //🚀🚀🚀 ⬇️ 📝 Explanation ⬇️ 📝 🚀🚀🚀: 
-
+// Nested function can have access to the variable internal because of closure. In this case, internal would be lexical scope 
 
 
 
@@ -30,11 +30,14 @@ function myFunction() {
 💡 NOTE: you may use a for loop for this function if you wish 
 */
 
-function summation(/*Your Code Here*/) {
-  /*Your Code Here*/
-
+function summation(number) {
+  let sum = 0
+  for (let i = 0; i < number+1; i++){
+    sum = sum + i
   }
- 
+  return sum
+} 
+console.log (summation(10))
 
 // 🦁🦁🦁 Topic 2: ADVANCED Array Methods 🦁🦁🦁
 // Given this zoo data from around the United States, follow the instructions below. Use the specific array methods in the requests below to solve the problems.
@@ -60,10 +63,12 @@ const zooAnimals = [
   💡 NOTE: the array returned should be an array of strings, and each string should follow this pattern: "name: {name}, scientific: {scientific name}"
   */
 
-  function animalNames(/*Your Code Here*/){
-    /*Your Code Here*/
+  function animalNames(data){
+    let displayNames = []
+    data.forEach (data => displayNames.push(`name: ${data.animal_name}, scientific: ${data.scientific_name}`))
+    return displayNames
   }
-  
+  console.log (animalNames(zooAnimals))
 
   /* 🦁🦁🦁 Request 2: .map() 🦁🦁🦁
   The zoo needs a list of all their animal's names converted to lower case. 
@@ -75,10 +80,14 @@ const zooAnimals = [
   💡 NOTE: Do some research for other methods that can help help you
   */
 
-  function lowerCaseNames(/*Your Code Here*/){
-    /*Your Code Here*/
-  }
-  
+  function lowerCaseNames(data){
+    const lowerCase = data.map((element) => {
+        return element.animal_name.toLowerCase()}
+        )
+        return lowerCase
+       }
+     
+  lowerCaseNames(zooAnimals)
   
   /* 🦁🦁🦁 Request 3: .filter() 🦁🦁🦁
   The zoo is concerned about animals with a lower population count. 
@@ -87,11 +96,13 @@ const zooAnimals = [
   2. Use .filter() to create a new array of objects which contains only the animals with a population of less than 5
   3. Return this new array
   */
-
-  function lowPopulationAnimals(/*Your Code Here*/){
-    /*Your Code Here*/
-  }
-  
+  function lowPopulationAnimals(data){
+    const lowPopulation = data.filter((element) => {
+        return element.population < 5
+    })
+    return lowPopulation}
+    
+    lowPopulationAnimals(zooAnimals)
 
   /* 🦁🦁🦁 Request 4: .reduce() 🦁🦁🦁
   The zoo needs to know their total animal population across the United States. 
@@ -102,10 +113,12 @@ const zooAnimals = [
   💡 NOTE: Remember the reduce method takes two arguments: a callback (which itself takes two args - the accumulator and the item), and an initial value for the count. Check MDN/W3Schools for syntax!
   */
 
-  function USApop(/*Your Code Here*/){
-    /*Your Code Here*/
-  }
-  
+  function USApop(data){
+    const totalPop = data.reduce ((total,element) =>{
+      return total + element.population
+    },0)
+    return totalPop}
+  USApop (zooAnimals)
   
   // 🦁🦁🦁 Callbacks 🦁🦁🦁  
   /* 🦁🦁🦁 Step 1: Create a higher-order function 🦁🦁🦁
@@ -116,8 +129,8 @@ const zooAnimals = [
     💡 NOTE: The tests for 'consume' will pass if it is created correctly and also after you correctly complete the functions 'add' and 'greeting' below in Step 2.
   */
 
-  function consume(/*Your Code Here */){
-    /*Your Code Here */
+  function consume(a,b,cb){
+    return cb (a,b)
   }
  
   
@@ -128,20 +141,20 @@ const zooAnimals = [
  2. Return the sum of those numbers
  */
 
-function add(/*Your Code Here */){
-    /*Your Code Here*/
+function add(num1, num2){
+    return num1 + num2
   }
-
+console.log (consume(2,3,add))
 
 /* Use multiply to do the following:
 1. Receive two numbers as an argument that are passed in from its first and second parameters
 2. Return the product of those numbers
 */
 
-function multiply(/*Your Code Here */){
-   /*Your Code Here */
+function multiply(num3,num4){
+   return num3 * num4
   }
-
+console.log (consume (5,6,multiply))
 
  /* Use greeting to do the following:
 1. Receive two strings (a first name and last name) as an argument that are passed in from its first and second parameters
@@ -149,10 +162,10 @@ function multiply(/*Your Code Here */){
 💡 NOTE: The string returned must match the format above or the test will not pass!
 */
 
-function greeting(/*Your Code Here */){
-   return /*Your Code Here */
-  }
-  
+function greeting(firstName, lastName){
+  return `Hello ${firstName} ${lastName}, nice to meet you!`
+ }
+console.log (consume('Mary', 'Poppins', greeting))
   
 // 🦁🦁🦁 Step 3: Check your work by un-commenting the following calls to consume(): 🦁🦁🦁 
 // ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️ ⬇️
@@ -175,8 +188,10 @@ function greeting(/*Your Code Here */){
 - Instances of CuboidMaker should initialize `length`, `width` and `height` properties
 */
 
-function CuboidMaker(/*Your Code Here */){
-  /*Your Code Here */
+function CuboidMaker(sizes){
+  this.length = sizes.length
+  this.width = sizes.width
+  this.height = sizes.height 
 }
 
 
@@ -184,7 +199,9 @@ function CuboidMaker(/*Your Code Here */){
   Create a method called volume using CuboidMaker's prototype that returns the volume of a given cuboid's length, width, and height
   💡 NOTE: Formula for cuboid volume: length * width * height   
 */
-
+CuboidMaker.prototype.volume = function (){
+  return this.length * this.width * this.height
+}
 
 
 
@@ -192,7 +209,9 @@ function CuboidMaker(/*Your Code Here */){
   Create another method called surfaceArea using CuboidMaker's prototype that returns the surface area of a given cuboid's length, width, and height. 
   💡 NOTE: Formula for cuboid surface area: 2 * (length * width + length * height + width * height)  
 */
-
+CuboidMaker.prototype.surfaceArea = function (){
+  return 2 * (this.length * this.width + this.length * this.height + this.width * this.height)
+}
 
 
 
@@ -214,7 +233,17 @@ function CuboidMaker(/*Your Code Here */){
 //Using CuboidMakerTwo, take your prototypes from above and refactor into class syntax. Then, create an object called cuboidTwo that uses the new keyword to use our CuboidMakerTwo class.
  
 class CuboidMakerTwo{
-
+  constructor (sizes){
+    this.length = sizes.length
+    this.width = sizes.width
+    this.height = sizes.height 
+  }
+  volume (){
+    return this.length * this.width * this.height
+  }
+  surfaceArea () {
+    return 2 * (this.length * this.width + this.length * this.height + this.width * this.height)
+  }
 }
 
 
